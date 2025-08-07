@@ -294,11 +294,9 @@
     </div>
 
     <script>
-        // Environment configuration - Replace these with your actual values
+        // Secure configuration - Uses Cloudflare Pages Function as proxy
         const API_CONFIG = {
-            WORKER_URL: 'CLOUDFLARE_WORKER_URL', // Replace with your Cloudflare Worker URL
-            API_KEY: 'YOUR_API_KEY', // Replace with your API key
-            BASIC_AUTH: btoa('YOUR_USERNAME:YOUR_PASSWORD') // Replace with your basic auth credentials
+            WORKER_URL: '/api/redeem-coupon', // Cloudflare Pages Function endpoint
         };
 
         function hideAllNotifications() {
@@ -401,17 +399,32 @@
             };
 
             try {
+                // Call Cloudflare Pages Function (which proxies to Worker securely)
                 const response = await fetch(API_CONFIG.WORKER_URL, {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
-                        'Authorization': `Basic ${API_CONFIG.BASIC_AUTH}`,
-                        'x-api-key': API_CONFIG.API_KEY
+                        // No sensitive headers - Pages Function handles authentication
                     },
                     body: JSON.stringify(formData)
                 });
 
-                const data = await response.json();
+                let data = {};
+                
+                // Only try to parse JSON if the response has content
+                const contentType = response.headers.get('content-type');
+                if (contentType && contentType.includes('application/json')) {
+                    try {
+                        data = await response.json();
+                    } catch (jsonError) {
+                        console.warn('Failed to parse JSON response:', jsonError);
+                        data = { error: 'Invalid response format' };
+                    }
+                } else {
+                    // Handle non-JSON responses
+                    const text = await response.text();
+                    data = { error: text || 'Unknown error occurred' };
+                }
 
                 if (response.ok) {
                     // Success - show coupon code
