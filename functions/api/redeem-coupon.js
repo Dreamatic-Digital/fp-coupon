@@ -45,7 +45,8 @@ export async function onRequestPost(context) {
           "Accept": request.headers.get("Accept") || "*/*",
           "Accept-Language": request.headers.get("Accept-Language") || "",
           // Forward connecting IP if available
-          "CF-Connecting-IP": request.headers.get("CF-Connecting-IP") || ""
+          "CF-Connecting-IP": request.headers.get("CF-Connecting-IP") || "",
+          "X-Client-Session": request.headers.get("X-Client-Session") || ""
         },
         body: requestBody
       });
