@@ -1,290 +1,73 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>Coupon Redemption Form</title>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet"/>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Roboto', sans-serif;
-            background-color: #f5f5f5;
-            min-height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 20px;
-        }
-
-        .wrapper {
-            display: flex;
-            flex-direction: row;
-            align-items: flex-start;
-            padding: 32px;
-            gap: 10px;
-            position: relative;
-            width: 650px;
-            height: 557px;
-            background: #D8DFF0;
-            border-radius: 25px;
-        }
-
-        .inner {
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            padding: 32px 120px;
-            gap: 16px;
-            width: 586px;
-            height: 493px;
-            background: #FFFFFF;
-            box-shadow: 0px 0px 8px rgba(79, 115, 158, 0.1);
-            border-radius: 25px;
-            flex: none;
-            align-self: stretch;
-            flex-grow: 1;
-        }
-
-        .header {
-            width: 226px;
-            height: 32px;
-            font-weight: 500;
-            font-size: 14px;
-            line-height: 16px;
-            display: flex;
-            align-items: center;
-            text-align: center;
-            color: #000000;
-            flex: none;
-            flex-grow: 0;
-        }
-
-        .form-fields {
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            padding: 10px;
-            gap: 10px;
-            width: 346px;
-            height: 328px;
-            flex: none;
-            align-self: stretch;
-            flex-grow: 0;
-        }
-
-        .field-email {
-            box-sizing: border-box;
-            display: flex;
-            flex-direction: row;
-            justify-content: space-between;
-            align-items: center;
-            padding: 16px 32px;
-            width: 326px;
-            height: 46px;
-            border: 1px solid #D0D7E3;
-            border-radius: 10px;
-            flex: none;
-            align-self: stretch;
-            flex-grow: 0;
-        }
-
-        .field-email input {
-            border: none;
-            outline: none;
-            font-family: 'Roboto', sans-serif;
-            font-size: 12px;
-            color: #6D6D6D;
-            background: transparent;
-            flex-grow: 1;
-        }
-
-        .field-email input::placeholder {
-            color: #6D6D6D;
-        }
-
-        .email-icon {
-            width: 17px;
-            height: 12px;
-            background: #0693E3;
-            mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.89 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z'/%3E%3C/svg%3E") no-repeat center;
-            mask-size: contain;
-        }
-
-        .submit {
-            display: flex;
-            flex-direction: row;
-            justify-content: center;
-            align-items: center;
-            padding: 16px 32px;
-            width: 326px;
-            height: 46px;
-            background: linear-gradient(90deg, #0693E3 0%, #33A7B5 100%);
-            border: 4px solid rgba(6, 147, 227, 0.25);
-            border-radius: 10px;
-            flex: none;
-            align-self: stretch;
-            flex-grow: 0;
-            cursor: pointer;
-            transition: transform 0.2s;
-        }
-
-        .submit:hover {
-            transform: translateY(-1px);
-        }
-
-        .submit-button {
-            font-family: 'Roboto', sans-serif;
-            font-weight: 500;
-            font-size: 12px;
-            line-height: 14px;
-            display: flex;
-            align-items: center;
-            color: #FFFFFF;
-            background: none;
-            border: none;
-            cursor: pointer;
-        }
-
-        .notification {
-            box-sizing: border-box;
-            display: flex;
-            flex-direction: row;
-            align-items: center;
-            padding: 16px;
-            gap: 8px;
-            width: 326px;
-            min-height: 56px;
-            border-radius: 10px;
-            flex: none;
-            align-self: stretch;
-            flex-grow: 0;
-            display: none;
-        }
-
-        .notification.error {
-            background: rgba(235, 95, 39, 0.15);
-            border: 1px solid rgba(235, 95, 39, 0.5);
-        }
-
-        .notification.warning {
-            background: rgba(238, 163, 0, 0.15);
-            border: 1px solid rgba(238, 163, 0, 0.5);
-        }
-
-        .notification.success {
-            background: rgba(74, 186, 99, 0.15);
-            border: 1px solid rgba(74, 186, 99, 0.5);
-        }
-
-        .notification-icon {
-            width: 24px;
-            height: 24px;
-            flex: none;
-            flex-grow: 0;
-        }
-
-        .notification-icon.error {
-            background: #EB5F27;
-            mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z'/%3E%3C/svg%3E") no-repeat center;
-            mask-size: contain;
-        }
-
-        .notification-icon.warning {
-            background: #EEA300;
-            mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M1 21h22L12 2 1 21zm12-3h-2v-2h2v2zm0-4h-2v-4h2v4z'/%3E%3C/svg%3E") no-repeat center;
-            mask-size: contain;
-        }
-
-        .notification-icon.success {
-            background: #4ABA63;
-            mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M9 16.2L4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4L9 16.2z'/%3E%3C/svg%3E") no-repeat center;
-            mask-size: contain;
-        }
-
-        .notification-message {
-            font-family: 'Roboto', sans-serif;
-            font-weight: 500;
-            font-size: 12px;
-            line-height: 14px;
-            display: flex;
-            align-items: center;
-            color: #4A4A4A;
-            flex-grow: 1;
-        }
-
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Roboto', sans-serif; background-color: #f5f5f5; min-height: 100vh; display: flex; justify-content: center; align-items: center; padding: 20px; }
+        .wrapper { display: flex; flex-direction: row; align-items: flex-start; padding: 32px; gap: 10px; position: relative; width: 650px; height: 557px; background: #D8DFF0; border-radius: 25px; }
+        .inner { display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 32px 120px; gap: 16px; width: 586px; height: 493px; background: #FFFFFF; box-shadow: 0 0 8px rgba(79,115,158,.1); border-radius: 25px; flex: none; align-self: stretch; flex-grow: 1; }
+        .header { width: 226px; height: 32px; font-weight: 500; font-size: 14px; line-height: 16px; display: flex; align-items: center; text-align: center; color: #000; flex: none; flex-grow: 0; }
+        .form-fields { display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 10px; gap: 10px; width: 346px; height: 328px; flex: none; align-self: stretch; flex-grow: 0; }
+        .field-email { box-sizing: border-box; display: flex; flex-direction: row; justify-content: space-between; align-items: center; padding: 16px 32px; width: 326px; height: 46px; border: 1px solid #D0D7E3; border-radius: 10px; flex: none; align-self: stretch; flex-grow: 0; }
+        .field-email input { border: none; outline: none; font-family: 'Roboto', sans-serif; font-size: 12px; color: #6D6D6D; background: transparent; flex-grow: 1; }
+        .field-email input::placeholder { color: #6D6D6D; }
+        .email-icon { width: 17px; height: 12px; background: #0693E3; mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.89 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z'/%3E%3C/svg%3E") no-repeat center; mask-size: contain; }
+        .submit { display: flex; flex-direction: row; justify-content: center; align-items: center; padding: 16px 32px; width: 326px; height: 46px; background: linear-gradient(90deg, #0693E3 0%, #33A7B5 100%); border: 4px solid rgba(6,147,227,.25); border-radius: 10px; flex: none; align-self: stretch; flex-grow: 0; cursor: pointer; transition: transform .2s; }
+        .submit:hover { transform: translateY(-1px); }
+        .submit-button { font-family: 'Roboto', sans-serif; font-weight: 500; font-size: 12px; line-height: 14px; display: flex; align-items: center; color: #FFF; background: none; border: none; cursor: pointer; }
+        .notification { box-sizing: border-box; display: flex; flex-direction: row; align-items: center; padding: 16px; gap: 8px; width: 326px; min-height: 56px; border-radius: 10px; flex: none; align-self: stretch; flex-grow: 0; display: none; }
+        .notification.error { background: rgba(235,95,39,.15); border: 1px solid rgba(235,95,39,.5); }
+        .notification.warning { background: rgba(238,163,0,.15); border: 1px solid rgba(238,163,0,.5); }
+        .notification.success { background: rgba(74,186,99,.15); border: 1px solid rgba(74,186,99,.5); }
+        .notification-icon { width: 24px; height: 24px; flex: none; flex-grow: 0; }
+        .notification-icon.error { background: #EB5F27; mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z'/%3E%3C/svg%3E") no-repeat center; mask-size: contain; }
+        .notification-icon.warning { background: #EEA300; mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M1 21h22L12 2 1 21zm12-3h-2v-2h2v2zm0-4h-2v-4h2v4z'/%3E%3C/svg%3E") no-repeat center; mask-size: contain; }
+        .notification-icon.success { background: #4ABA63; mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M9 16.2L4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4L9 16.2z'/%3E%3C/svg%3E") no-repeat center; mask-size: contain; }
+        .notification-message { font-family: 'Roboto', sans-serif; font-weight: 500; font-size: 12px; line-height: 14px; display: flex; align-items: center; color: #4A4A4A; flex-grow: 1; }
         @media (max-width: 700px) {
-            .wrapper {
-                width: 100%;
-                max-width: 500px;
-                height: auto;
-                padding: 20px;
-            }
-            
-            .inner {
-                width: 100%;
-                padding: 20px 40px;
-            }
-            
-            .form-fields {
-                width: 100%;
-            }
-            
-            .field-email, .submit, .notification {
-                width: 100%;
-            }
+            .wrapper { width: 100%; max-width: 500px; height: auto; padding: 20px; }
+            .inner { width: 100%; padding: 20px 40px; }
+            .form-fields { width: 100%; }
+            .field-email, .submit, .notification { width: 100%; }
         }
     </style>
 </head>
 <body>
     <div class="wrapper">
         <div class="inner">
-            <div class="header">
-                Redeem Your Coupon Code
-            </div>
-            
+            <div class="header">Redeem Your Coupon Code</div>
             <div class="form-fields">
                 <div class="field-email">
-                    <input type="text" id="firstName" placeholder="First Name" required>
+                    <input type="text" id="firstName" placeholder="First Name" required />
                 </div>
-                
                 <div class="field-email">
-                    <input type="text" id="lastName" placeholder="Last Name" required>
+                    <input type="text" id="lastName" placeholder="Last Name" required />
                 </div>
-                
                 <div class="field-email">
-                    <input type="email" id="email" placeholder="Email" required>
+                    <input type="email" id="email" placeholder="Email" required />
                     <div class="email-icon"></div>
                 </div>
-                
                 <div class="field-email">
-                    <label style="display: flex; align-items: center; font-size: 12px; color: #6D6D6D;">
-                        <input type="checkbox" id="consent" required style="margin-right: 8px;">
+                    <label style="display:flex;align-items:center;font-size:12px;color:#6D6D6D;">
+                        <input type="checkbox" id="consent" required style="margin-right:8px;"/>
                         I consent to receive promotional emails
                     </label>
                 </div>
-                
                 <div class="submit" onclick="handleSubmit()">
                     <button class="submit-button" type="button" id="submitBtn">Redeem Coupon</button>
                 </div>
-                
                 <div class="notification error" id="error-notification">
                     <div class="notification-icon error"></div>
                     <div class="notification-message" id="error-message">Invalid email format. Please check your email address.</div>
                 </div>
-                
                 <div class="notification warning" id="warning-notification">
                     <div class="notification-icon warning"></div>
                     <div class="notification-message" id="warning-message">Email already used. Please try a different email address.</div>
                 </div>
-                
                 <div class="notification success" id="success-notification">
                     <div class="notification-icon success"></div>
                     <div class="notification-message" id="success-message">Coupon redeemed successfully!</div>
@@ -294,10 +77,24 @@
     </div>
 
     <script>
-        // Secure configuration - Uses Cloudflare Pages Function as proxy
-        const API_CONFIG = {
-            WORKER_URL: '/api/redeem-coupon', // Cloudflare Pages Function endpoint
-        };
+        // Pages Function endpoint (proxy to Worker)
+        const API_CONFIG = { WORKER_URL: '/api/redeem-coupon' };
+
+        // Generate/load a stable per-browser session id (survives VPN/NAT)
+        function getClientSessionId() {
+            try {
+                let sid = localStorage.getItem('fp_sid');
+                if (!sid) {
+                    if (crypto && crypto.randomUUID) sid = crypto.randomUUID();
+                    else sid = String(Date.now()) + '-' + Math.random().toString(16).slice(2);
+                    localStorage.setItem('fp_sid', sid);
+                }
+                return sid;
+            } catch (_) {
+                // Fallback if localStorage is blocked
+                return String(Date.now()) + '-' + Math.random().toString(16).slice(2);
+            }
+        }
 
         function hideAllNotifications() {
             document.getElementById('error-notification').style.display = 'none';
@@ -309,132 +106,87 @@
             hideAllNotifications();
             const notification = document.getElementById(type + '-notification');
             const messageElement = document.getElementById(type + '-message');
-            
-            if (message) {
-                messageElement.textContent = message;
-            }
-            
+            if (message) messageElement.textContent = message;
             notification.style.display = 'flex';
-            
-            // Auto-hide success notification after 5 seconds
-            if (type === 'success') {
-                setTimeout(() => {
-                    notification.style.display = 'none';
-                }, 5000);
-            }
+            if (type === 'success') setTimeout(() => { notification.style.display = 'none'; }, 5000);
         }
 
         function validateForm() {
             const firstName = document.getElementById('firstName').value.trim();
-            const lastName = document.getElementById('lastName').value.trim();
-            const email = document.getElementById('email').value.trim();
-            const consent = document.getElementById('consent').checked;
+            const lastName  = document.getElementById('lastName').value.trim();
+            const email     = document.getElementById('email').value.trim();
+            const consent   = document.getElementById('consent').checked;
 
-            if (!firstName) {
-                showNotification('error', 'First name is required.');
-                return false;
-            }
-
-            if (!lastName) {
-                showNotification('error', 'Last name is required.');
-                return false;
-            }
-
-            if (!email) {
-                showNotification('error', 'Email address is required.');
-                return false;
-            }
+            if (!firstName) return showNotification('error', 'First name is required.'), false;
+            if (!lastName)  return showNotification('error', 'Last name is required.'), false;
+            if (!email)     return showNotification('error', 'Email address is required.'), false;
 
             const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-            if (!emailRegex.test(email)) {
-                showNotification('error', 'Please enter a valid email address.');
-                return false;
-            }
-
-            if (!consent) {
-                showNotification('error', 'You must consent to receive promotional emails.');
-                return false;
-            }
-
-            if (firstName.length > 100 || lastName.length > 100) {
-                showNotification('error', 'Name fields must be 100 characters or less.');
-                return false;
-            }
+            if (!emailRegex.test(email)) return showNotification('error', 'Please enter a valid email address.'), false;
+            if (!consent) return showNotification('error', 'You must consent to receive promotional emails.'), false;
+            if (firstName.length > 100 || lastName.length > 100) return showNotification('error', 'Name fields must be 100 characters or less.'), false;
 
             return true;
         }
 
         function setSubmitButtonState(loading) {
             const submitBtn = document.getElementById('submitBtn');
-            if (loading) {
-                submitBtn.textContent = 'Redeeming...';
-                submitBtn.disabled = true;
-                submitBtn.style.opacity = '0.6';
-            } else {
-                submitBtn.textContent = 'Redeem Coupon';
-                submitBtn.disabled = false;
-                submitBtn.style.opacity = '1';
-            }
+            submitBtn.textContent = loading ? 'Redeeming...' : 'Redeem Coupon';
+            submitBtn.disabled = !!loading;
+            submitBtn.style.opacity = loading ? '0.6' : '1';
         }
 
         function clearForm() {
             document.getElementById('firstName').value = '';
-            document.getElementById('lastName').value = '';
-            document.getElementById('email').value = '';
+            document.getElementById('lastName').value  = '';
+            document.getElementById('email').value     = '';
             document.getElementById('consent').checked = false;
         }
 
         async function handleSubmit() {
-            if (!validateForm()) {
-                return;
-            }
+            if (!validateForm()) return;
 
             setSubmitButtonState(true);
 
             const formData = {
                 firstName: document.getElementById('firstName').value.trim(),
-                lastName: document.getElementById('lastName').value.trim(),
-                email: document.getElementById('email').value.trim(),
-                consent: document.getElementById('consent').checked
+                lastName : document.getElementById('lastName').value.trim(),
+                email    : document.getElementById('email').value.trim(),
+                consent  : document.getElementById('consent').checked
             };
 
+            const sid = getClientSessionId();
+
             try {
-                // Call Cloudflare Pages Function (which proxies to Worker securely)
                 const response = await fetch(API_CONFIG.WORKER_URL, {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
-                        // No sensitive headers - Pages Function handles authentication
+                        // Session header → forwarded by Pages Function to Worker for fingerprint
+                        'X-Client-Session': sid
                     },
                     body: JSON.stringify(formData)
                 });
 
                 let data = {};
-                
-                // Only try to parse JSON if the response has content
                 const contentType = response.headers.get('content-type');
                 if (contentType && contentType.includes('application/json')) {
-                    try {
-                        data = await response.json();
-                    } catch (jsonError) {
+                    try { data = await response.json(); }
+                    catch (jsonError) {
                         console.warn('Failed to parse JSON response:', jsonError);
                         data = { error: 'Invalid response format' };
                     }
                 } else {
-                    // Handle non-JSON responses
                     const text = await response.text();
                     data = { error: text || 'Unknown error occurred' };
                 }
 
                 if (response.ok) {
-                    // Success - show coupon code
                     showNotification('success', `Coupon redeemed successfully! Your code: ${data.coupon}`);
                     clearForm();
                 } else {
-                    // Handle different error scenarios based on status code
-                    handleApiError(response.status, data.error);
+                    handleApiError(response.status, data.error || '');
                 }
-
             } catch (error) {
                 console.error('Network error:', error);
                 showNotification('error', 'Network error. Please check your connection and try again.');
@@ -445,65 +197,26 @@
 
         function handleApiError(status, errorMessage) {
             switch (status) {
-                case 400:
-                    // Bad request - validation errors
-                    showNotification('error', errorMessage || 'Please check your input and try again.');
-                    break;
-                
-                case 401:
-                    // Unauthorized - auth failure
-                    showNotification('error', 'Authentication failed. Please contact support.');
-                    break;
-                
-                case 403:
-                    // Forbidden - domain blocked or invalid
-                    if (errorMessage.includes('domain')) {
-                        showNotification('warning', 'Your email domain is not eligible for this promotion.');
-                    } else {
-                        showNotification('error', errorMessage || 'Access denied.');
-                    }
-                    break;
-                
-                case 409:
-                    // Conflict - already redeemed
-                    showNotification('warning', 'You have already redeemed a coupon with this email address.');
-                    break;
-                
-                case 410:
-                    // Gone - no more coupons
-                    showNotification('error', 'Sorry, all coupons have been redeemed. Please contact your employer.');
-                    break;
-                
-                case 415:
-                    // Unsupported media type
-                    showNotification('error', 'Request format error. Please try again.');
-                    break;
-                
-                case 429:
-                    // Rate limited
-                    if (errorMessage.includes('network')) {
-                        showNotification('warning', 'Too many requests from your network. Please wait a moment and try again.');
-                    } else {
-                        showNotification('warning', 'Please wait before trying again.');
-                    }
-                    break;
-                
-                default:
-                    // Generic server error
-                    showNotification('error', errorMessage || 'Server error. Please try again later.');
-                    break;
+                case 400: return showNotification('error', errorMessage || 'Please check your input and try again.');
+                case 401: return showNotification('error', 'Authentication failed. Please contact support.');
+                case 403: return errorMessage.includes('domain')
+                          ? showNotification('warning', 'Your email domain is not eligible for this promotion.')
+                          : showNotification('error', errorMessage || 'Access denied.');
+                case 409: return showNotification('warning', 'You have already redeemed a coupon with this email address.');
+                case 410: return showNotification('error', 'Sorry, all coupons have been redeemed. Please contact your employer.');
+                case 415: return showNotification('error', 'Request format error. Please try again.');
+                case 429: return errorMessage.includes('network')
+                          ? showNotification('warning', 'Too many requests from your network. Please wait a moment and try again.')
+                          : showNotification('warning', 'Please wait before trying again.');
+                default:  return showNotification('error', errorMessage || 'Server error. Please try again later.');
             }
         }
 
-        // Handle Enter key press on form fields
-        document.addEventListener('DOMContentLoaded', function() {
-            const inputs = ['firstName', 'lastName', 'email'];
-            inputs.forEach(inputId => {
-                document.getElementById(inputId).addEventListener('keypress', function(event) {
-                    if (event.key === 'Enter') {
-                        handleSubmit();
-                    }
-                });
+        // Submit on Enter in text inputs
+        document.addEventListener('DOMContentLoaded', () => {
+            ['firstName','lastName','email'].forEach(id => {
+                const el = document.getElementById(id);
+                el.addEventListener('keypress', (e) => { if (e.key === 'Enter') handleSubmit(); });
             });
         });
     </script>
